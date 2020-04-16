@@ -10,54 +10,61 @@ template <typename T>
 class stack {
 	T* data;
 	int itop;
+	int top;
 	int capacity;
 
 public:
 	stack(int size = MAX){
 		data = new T[size];
-		itop = -1;
+		top = -1;
+		capacity = size;
 	}
 	~stack(){
 		delete data;
 	}   		
 
-	void push(T value){
-		if (itop == (capacity - 1)){
+	void push(T newValue){
+		// If stack is full, show 'overflow' message.
+		if (top >= (capacity - 1)){
 			cout << "Overflow instruction" << endl;
 		}
+		// Else, top goes to next position and add the new value.
 		else{
-			itop++;
-			data[itop] = value;
+			top++;
+			data[top] = newValue;
 		}
 	}
 
-	int pop(){
-		if(itop < 0){
+	void pop(){
+		// If stack is empty, show 'underflow' message.
+		if(top < 0){
 			cout << "Underflow instruction" << endl;
-			return 0;
 		}
+		// Else, top goes to previous position.
 		else{
-			itop = itop - 1;
-			return data[itop+1];
+			top = top - 1;
 		}
 	}
 
-	int top(){
-		if(itop < 0){
-			cout << "No hay top, stack vacío" << endl;
+	T peak(){
+		// If stack is empty, show 'no peak element' message.
+		if(top < 0){
+			cout << "No peak element, empty stack" << endl;
 			return 0;
 		}
+		// Else, return the peak element.
 		else{
-			return data[itop];
+			return data[top];
 		}	
 	}
 
 	int size(){
-		return (itop+1);
+		// Because first stack element starts in 'top = 0', the stack size is (top + 1).
+		return (top+1);
 	}
 
 	bool empty(){
-		if(itop < 0){
+		if(top < 0){
 			return true;
 		}
 		else{
