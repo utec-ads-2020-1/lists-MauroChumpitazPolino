@@ -1,9 +1,10 @@
 #ifndef STACK_H
 #define STACK_H
 
+#include <cstring>
 using namespace std;
 
-#define MAX 1000
+#define MAX 10
 
 // TODO: Implement all methods
 template <typename T>
@@ -19,7 +20,7 @@ public:
 		capacity = size;
 	}
 	~stack(){
-		delete []data;
+		delete[] data;
 	}   		
 
 	// Resize the Stack to enable push() function
