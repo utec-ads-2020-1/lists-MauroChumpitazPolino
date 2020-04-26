@@ -2,11 +2,11 @@
 #define STACK_H
 
 #include <cstring>
+#include <stdexcept>
 using namespace std;
 
 #define MAX 10
 
-// TODO: Implement all methods
 template <typename T>
 class stack {
 	T* data;
@@ -39,6 +39,7 @@ public:
 		if (top >= (capacity - 1)){
 			resize();
 		}
+
 		top++;
 		data[top] = newValue;
 	}
@@ -56,31 +57,23 @@ public:
 			top = top - 1;
 		}
 	}
-
+	
 	// Returns the peak value if Stack is not empty, else return a null
 	T peak(){
 		if(top < 0){
-			cout << "Null peak, stack is empty" << endl;
-			return 0;
+			throw out_of_range("Stack is empty, no peak element.");
 		}
-		else{
-			return data[top];
-		}	
+		return data[top];
 	}
 
-	// Returns the Queue size, zero if it is empty
+	// Returns the Queue size
 	int size(){
 		return (top+1);
 	}
 
 	// Return true if Queue is empty
 	bool empty(){
-		if(top < 0){
-			return true;
-		}
-		else{
-			return false;
-		}
+		return (top < 0)? true : false;
 	}
 
 };

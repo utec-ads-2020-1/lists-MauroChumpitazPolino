@@ -7,7 +7,21 @@ struct Node {
     Node<T>* next;
     Node<T>* prev;
 
-    void killSelf();
+    Node(){
+        next = nullptr;
+        prev = nullptr;
+    }
+
+    void killSelf(){
+        if(!this){
+            return;
+        }
+        if(next != nullptr && next != this){
+            next->killSelf();
+        }
+
+        delete this;
+    }
 };
 
-#endif
+#endif //NODE_H

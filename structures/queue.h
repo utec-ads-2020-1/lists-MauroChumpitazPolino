@@ -2,6 +2,7 @@
 #define QUEUE_H
 
 #include <cstring>
+#include <stdexcept>
 using namespace std;
 
 #define MAX 10
@@ -30,18 +31,18 @@ public:
 
 		memcpy(newData, data, capacity * sizeof(data[0]) );
 		capacity = newSize;
-		delete [] data; 
+		delete[] data; 
 		data = newData;
 	}
 
-	// Shift all values one position to right
+	// Shift all elements one position to right
 	void pushShift(){
 		for(int i = top; i >= 0; i--){
 			data[i+1] = data[i];
 		}
 	}
 
-	// Push one value into the Queue
+	// Push an element into the Queue
 	void push(T newValue){
 		if (top >= (capacity - 1) ){
 			resize();
@@ -51,7 +52,7 @@ public:
 		top++;
 	}
 
-	// Pop one value from Queue or send messages if needed
+	// Pop an element from Queue or send messages if needed
 	void pop(){
 		if (top < 0){
 			cout << "Underflow instruction" << endl;
@@ -65,44 +66,32 @@ public:
 		}
 	}
 
-	// Returns the front value or null if Queue is empty
+	// Returns the front element or throw an error if empty
 	T front(){
 		if (top < 0)
 		{
-			cout <<"Queue is empty, front is null" << endl;
-			return 0;
+			throw out_of_range("Queue is empty, front is null.");
 		}
-		else{
-			return data[top];
-		}
-		
+		return data[top];	
 	}
 
-	// Returns the back value or null if Queue is empty
+	// Returns the back element or throw an error if empty
     T back(){
 		if (top < 0)
 		{
-			cout <<"Queue is empty, back is null" << endl;
-			return 0;
+			throw out_of_range("Queue is empty, back is null.");
 		}
-		else{
-			return data[0];
-		}
+		return data[0];
 	}
 
-	// Returns the Queue size, zero if it is empty
+	// Returns the Queue size
 	int size(){
 		return (top+1);
 	}
 
 	// Return true if Queue is empty
 	bool empty(){
-		if(top < 0){
-			return true;
-		}
-		else{
-			return false;
-		}
+		return (top < 0)? true : false;
 	}
 
 };

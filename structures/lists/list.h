@@ -1,7 +1,9 @@
 #ifndef LIST_H
 #define LIST_H
 
+#include <stdexcept>
 #include "node.h"
+using namespace std;
 
 // TODO: Implement all methods
 template <typename T>
@@ -13,7 +15,9 @@ class List {
 
     public:
         List() : head(nullptr), tail(nullptr), nodes(0) {};
-        ~List();
+        ~List(){
+            head->killSelf();
+        }
 
         virtual T front() = 0;
         virtual T back() = 0;

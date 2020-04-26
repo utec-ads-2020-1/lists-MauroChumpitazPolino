@@ -8,20 +8,69 @@ template <typename T>
 class BidirectionalIterator {
     private:
         Node<T> *current;
+        bool inLimit;
 
     public:
-        BidirectionalIterator();
-        BidirectionalIterator(Node<T>*);
+        BidirectionalIterator(){
+            this->current = nullptr;
+            inLimit = false;
+        }
+        BidirectionalIterator(Node<T>* listNode){
+            this->current = listNode;
+            inLimit = false;
+        }
 
-        BidirectionalIterator<T> operator=(BidirectionalIterator<T>);
+        BidirectionalIterator<T> operator=(BidirectionalIterator<T> eqItr){
+            if(this->current != eqItr.current){
+                this->current = eqItr.current; 
+            }
+            return this->current;
+        }
 
-        bool operator!=(BidirectionalIterator<T>);
+        bool operator!=(BidirectionalIterator<T> neqItr){
+            if (this->current == nullptr){
+                throw out_of_range("BidirectionalIterator is not initialized.");
+            }
 
-        BidirectionalIterator<T> operator++();
+            if (neqItr.current != nullptr){
+                if(inLimit == true){
+                    inLimit = false;
+                    return false;
+                }
+                else if(neqItr.current->prev == this->current){
+                    inLimit = true;
+                }
+            }
+            
+            return this->current != neqItr.current;
+        }
 
-        BidirectionalIterator<T> operator--();
+        BidirectionalIterator<T> operator++(){
+            if(this->current == nullptr){
+                throw out_of_range("BidirectionalIterator is not initialized.");
+            }
+            else{
+                this->current = this->current->next;
+                return this->current;
+            }
+        }
 
-        T operator*();
+        BidirectionalIterator<T> operator--(){
+            if(this->current == nullptr){
+                throw out_of_range("BidirectionalIterator is not initialized.");
+            }
+            else{
+                this->current = this->current->prev;
+                return this->current;
+            }
+        }
+
+        T operator*(){
+            if(this->current == nullptr){
+                throw out_of_range("BidirectionalIterator is not initialized.");
+            }
+            return this->current->data;
+        }
 };
 
 #endif
