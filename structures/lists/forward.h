@@ -25,6 +25,7 @@ class ForwardList : public List<T> {
             if(this->head == nullptr){
                 throw out_of_range("Forward list is empty, no back element.");
             }
+            // Por qué creas un Nodo? 
             auto backNode = new Node<T>;
             backNode = this->head;
             while(backNode->next != nullptr){
@@ -83,13 +84,13 @@ class ForwardList : public List<T> {
             if(this->head->next == nullptr){
                 this->head = nullptr;
                 this->nodes = 0;
-                popNode->killSelf();
+                popNode->killSelf(); // No es la mejor forma
                 cout << "Forward List is empty now" << endl;
             }
             else{
                 this->head = this->head->next;
                 popNode->next = nullptr;
-                popNode->killSelf();
+                popNode->killSelf(); // Por qué no delete simplemente?
                 this->nodes--;
             }
         }
@@ -204,6 +205,7 @@ class ForwardList : public List<T> {
         }
 
 	    ForwardIterator<T> end(){
+            // Creas un nuevo nodo cada vez
             auto iterNode = new Node<T>;
             iterNode = this->head;
             while(iterNode->next != nullptr){

@@ -13,7 +13,7 @@ struct Node {
     }
 
     void killSelf(){
-        if(!this){
+        if(!this){ //warning: 'this' pointer cannot be null in well-defined C++ code; pointer may be assumed to always convert to true
             return;
         }
         if(next != nullptr && next != this){

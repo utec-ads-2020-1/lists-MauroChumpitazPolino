@@ -135,7 +135,7 @@ class LinkedList : public List<T> {
         }
 
         bool empty(){
-            return (this->nodes > 0)? false : true;
+            return (this->nodes > 0)? false : true; // Podría ser solo: this->nodes == 0
         }
 
         int size(){
@@ -184,7 +184,7 @@ class LinkedList : public List<T> {
         }
 
         void reverse(){
-            auto tempHead = new Node<T>;
+            auto tempHead = new Node<T>; // Podría ser más eficiente
             for (int i = (this->nodes - 1); i > 0; i--){
                 tempHead = this->head;
                 for (int j = i; j > 0; j--){

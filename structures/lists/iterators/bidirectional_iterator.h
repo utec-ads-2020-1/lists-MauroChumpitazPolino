@@ -24,6 +24,7 @@ class BidirectionalIterator {
             if(this->current != eqItr.current){
                 this->current = eqItr.current; 
             }
+            // Creas nuevos iteradores
             return this->current;
         }
 
@@ -51,6 +52,7 @@ class BidirectionalIterator {
             }
             else{
                 this->current = this->current->next;
+                // Creas nuevos iteradores
                 return this->current;
             }
         }
@@ -61,6 +63,7 @@ class BidirectionalIterator {
             }
             else{
                 this->current = this->current->prev;
+                 // Creas nuevos iteradores
                 return this->current;
             }
         }
